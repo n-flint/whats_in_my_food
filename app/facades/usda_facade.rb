@@ -5,32 +5,18 @@ class UsdaFacade
   end
 
   def total_results
-    conn = Faraday.new('https://api.nal.usda.gov/ndb/search/') do |f|
-      f.params['api_key'] = ENV['USDA_API_KEY']
-      f.params['q'] = "#{@query}"
-      f.params['max'] = "10"
-      f.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
-    data = JSON.parse(response.body)
-    data['list']['total']
+    usda_service.result_count
   end
 
   def foods
-    conn = Faraday.new('https://api.nal.usda.gov/ndb/search/') do |f|
-      f.params['api_key'] = ENV['USDA_API_KEY']
-      f.params['q'] = "#{@query}"
-      f.params['max'] = "10"
-      f.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
-    data = JSON.parse(response.body)['list']['item']
-    data.map do |f|
+    usda_service.food_list.map do |f|
       Food.new(f)
     end
   end
 
+  private
 
+  def usda_service
+    UsdaService.new(@query)
+  end
 end
