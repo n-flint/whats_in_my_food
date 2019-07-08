@@ -1,1 +1,13 @@
 <h2>Total Results: <%= facade.total_results%></h2>
+
+<section class='foods'>
+  <% facade.foods.each do |f| %>
+    <section class='food'>
+      <li class='ndbno'><%= f.ndbno %></li>
+      <li class='name'><%= f.name %></li>
+      <li class='group'><%= f.group %></li>
+      <li class='ds'><%= f.ds %></li>
+      <li class='manu'><%= f.manu %></li>
+    </section>
+  <% end %>
+</section>
