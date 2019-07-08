@@ -23,11 +23,11 @@ RSpec.describe 'as a user' do
       # - The food's data source
       # - The food's manufacturer
       within first('.food') do
-        expect(page).to have_css('.ndb')
+        expect(page).to have_css('.ndbno')
         expect(page).to have_css('.name')
         expect(page).to have_css('.group')
-        expect(page).to have_css('.data_source')
-        expect(page).to have_css('.manufacturer')
+        expect(page).to have_css('.ds')
+        expect(page).to have_css('.manu')
       end
     end
   end
